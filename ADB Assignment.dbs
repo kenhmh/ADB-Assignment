@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ADB Assignment Logical Datatbase Design" id="Project-dc" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="ADB Assignment Logical Datatbase Design" >
+		<table name="BoardingPass" prior="entity" >
+			<column name="BoardingPassID" type="INT" jt="4" mandatory="y" />
+			<column name="IssueDate" type="DATE" jt="91" />
+			<column name="BoardingGate" type="INT" jt="4" />
+			<column name="BoardingPassType" type="CHAR" length="15" jt="1" />
+			<column name="BoardingPassStatus" type="CHAR" length="15" jt="1" />
+			<index name="pk_boardingpass" unique="PRIMARY_KEY" >
+				<column name="BoardingPassID" />
+			</index>
+		</table>
+		<table name="Seat" prior="entity" >
+			<column name="SeatClass" type="CHAR" length="15" jt="1" >
+				<comment><![CDATA[Economy/ First class/ business class]]></comment>
+			</column>
+			<column name="SeatNo" type="INT" jt="4" />
+		</table>
+		<table name="Transaction" prior="Tran" >
+			<column name="TransactionStatus" type="CHAR" length="10" jt="1" />
+			<column name="Transaction Statement Release Date" type="DATE" jt="91" />
+			<column name="TransactionID" type="INT" jt="4" mandatory="y" />
+			<index name="pk_transaction" unique="PRIMARY_KEY" >
+				<column name="TransactionID" />
+			</index>
+			<fk name="Reserves" virtual="y" to_schema="ADB Assignment Logical Datatbase Design.INSTANCE" to_table="Seat" type="ManyToMany" >
+				<fk_column name="TransactionID" pk="SeatNo" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-1256" show_relation="columns" >
+		<entity schema="ADB Assignment Logical Datatbase Design.INSTANCE" name="BoardingPass" color="C1D8EE" x="352" y="176" />
+		<entity schema="ADB Assignment Logical Datatbase Design.INSTANCE" name="Seat" color="C1D8EE" x="1072" y="160" />
+		<entity schema="ADB Assignment Logical Datatbase Design.INSTANCE" name="Transaction" color="C1D8EE" x="688" y="160" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[A layout is a diagram with tools.
+- For a better understanding of the schema, create multiple layouts.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+	</layout>
+</project>
